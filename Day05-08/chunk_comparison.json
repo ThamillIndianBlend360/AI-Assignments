@@ -1,0 +1,843 @@
+{
+  "source_document": "sample_doc.md",
+  "normalized_characters": 2905,
+  "parsed_blocks": 16,
+  "settings": {
+    "chunk_size": 400,
+    "overlap": 50
+  },
+  "strategies": {
+    "fixed_size": {
+      "chunk_count": 9,
+      "min_characters": 105,
+      "max_characters": 400,
+      "mean_characters": 367.2,
+      "chunks_over_fixed_size_target": 0,
+      "checks": [
+        {
+          "test": "1 - Boundary preservation",
+          "status": "WARN",
+          "evidence": {
+            "rule": "Temporary access must be requested through the service desk with a named owner, a business reason, and an expiry date. The owner must confirm that the requested permissions are limited to the systems required for the assignment. Security reviews the request before any credentials are issued. Temporary access expires after seven calendar days. Extensions require a new approval before the original expiry; an open support ticket does not extend access automatically. When the assignment ends early, the owner must request revocation on the same day.",
+            "rule_characters": 550,
+            "intersecting_chunks": [
+              1,
+              2,
+              3
+            ],
+            "chunks_with_complete_rule": [],
+            "finding": "No chunk contains the complete rule; readers must join fragments."
+          }
+        },
+        {
+          "test": "2 - Heading relationship",
+          "status": "PASS",
+          "evidence": {
+            "expected_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+            "chunks": [
+              5,
+              6
+            ],
+            "reconstructed_paths": {
+              "5": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Reimbursement Rules"
+                ],
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Approval Checklist"
+                ]
+              ],
+              "6": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Approval Checklist"
+                ],
+                [
+                  "Internal Operations Handbook",
+                  "Service Operations",
+                  "Response Targets"
+                ],
+                [
+                  "Internal Operations Handbook",
+                  "Service Operations",
+                  "Shift Handoff"
+                ]
+              ]
+            },
+            "finding": "Heading paths reconstruct the parent context, including crossed sections."
+          }
+        },
+        {
+          "test": "3 - Small detail",
+          "status": "PASS",
+          "evidence": {
+            "detail": "Emergency contact: extension 771.",
+            "chunks_with_complete_detail": [
+              3
+            ],
+            "containing_chunk_lengths": [
+              400
+            ],
+            "detail_fraction": [
+              0.083
+            ],
+            "finding": "Detail retained with surrounding incident context."
+          }
+        },
+        {
+          "test": "4 - Overlap duplication",
+          "status": "PASS",
+          "evidence": {
+            "repeated_characters": 400,
+            "fraction_of_emitted_characters": 0.121,
+            "neighbor_pairs": [
+              {
+                "chunks": [
+                  0,
+                  1
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "nce. Annual leave longer than three consecutive da"
+              },
+              {
+                "chunks": [
+                  1,
+                  2
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "he systems required for the assignment. Security r"
+              },
+              {
+                "chunks": [
+                  2,
+                  3
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "e same day.\n\nReport suspected credential exposure "
+              },
+              {
+                "chunks": [
+                  3,
+                  4
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "771.\n\nInternational business trips require approva"
+              },
+              {
+                "chunks": [
+                  4,
+                  5
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "r must verify the business purpose before approvin"
+              },
+              {
+                "chunks": [
+                  5,
+                  6
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "INR 10,000, obtain finance approval.\n- Submit the "
+              },
+              {
+                "chunks": [
+                  6,
+                  7
+                ],
+                "repeated_characters": 50,
+                "repeated_text": " document any change in priority in the ticket.\n\n1"
+              },
+              {
+                "chunks": [
+                  7,
+                  8
+                ],
+                "repeated_characters": 50,
+                "repeated_text": "covery\n\nThe outgoing responder remains responsible"
+              }
+            ],
+            "finding": "Overlap supplies local boundary context, but does not guarantee complete rules."
+          }
+        },
+        {
+          "test": "5 - Metadata",
+          "status": "PASS",
+          "evidence": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 3,
+            "section_heading": "Internal Operations Handbook > Access and Security > Temporary Access",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Temporary Access"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Incident Reporting"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "International Travel"
+              ]
+            ],
+            "start_char": 1050,
+            "end_char": 1450
+          }
+        },
+        {
+          "test": "6 - Mixed structure",
+          "status": "WARN",
+          "evidence": {
+            "blocks": [
+              {
+                "heading": "Response Targets",
+                "kind": "table",
+                "parsed_text": "| Priority | First response | Escalation owner |\n| P1 | 15 minutes | On-call lead |\n| P2 | 4 business hours | Service desk |\n| P3 | 2 business days | Team coordinator |",
+                "chunks_preserving_entire_block": [
+                  6
+                ]
+              },
+              {
+                "heading": "Approval Checklist",
+                "kind": "list",
+                "parsed_text": "- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.",
+                "chunks_preserving_entire_block": []
+              }
+            ],
+            "finding": "Whole tables retain column labels; whole lists retain item relationships."
+          }
+        }
+      ],
+      "chunks": [
+        {
+          "text": "This fictional handbook describes everyday operating rules for Northstar Labs. It is a training document, not an actual organizational policy. Team members should use the section headings to locate the rule that applies to their work.\n\nEmployees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive da",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 0,
+            "section_heading": "Internal Operations Handbook",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Human Resources",
+                "Annual Leave"
+              ]
+            ],
+            "start_char": 0,
+            "end_char": 400
+          }
+        },
+        {
+          "text": "nce. Annual leave longer than three consecutive days requires manager approval.\n\nEmployees taking sick leave should notify their manager as early as practical.\n\nTemporary access must be requested through the service desk with a named owner, a business reason, and an expiry date. The owner must confirm that the requested permissions are limited to the systems required for the assignment. Security r",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 1,
+            "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Human Resources",
+                "Annual Leave"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Human Resources",
+                "Sick Leave"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Temporary Access"
+              ]
+            ],
+            "start_char": 350,
+            "end_char": 750
+          }
+        },
+        {
+          "text": "he systems required for the assignment. Security reviews the request before any credentials are issued. Temporary access expires after seven calendar days. Extensions require a new approval before the original expiry; an open support ticket does not extend access automatically. When the assignment ends early, the owner must request revocation on the same day.\n\nReport suspected credential exposure ",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 2,
+            "section_heading": "Internal Operations Handbook > Access and Security > Temporary Access",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Temporary Access"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Incident Reporting"
+              ]
+            ],
+            "start_char": 700,
+            "end_char": 1100
+          }
+        },
+        {
+          "text": "e same day.\n\nReport suspected credential exposure immediately to the service desk. Include the affected system and the time of discovery, but never paste a password or access token into the ticket. Security coordinates containment and records the actions taken so that the next responder can continue the investigation.\n\nEmergency contact: extension 771.\n\nInternational business trips require approva",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 3,
+            "section_heading": "Internal Operations Handbook > Access and Security > Temporary Access",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Temporary Access"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Incident Reporting"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "International Travel"
+              ]
+            ],
+            "start_char": 1050,
+            "end_char": 1450
+          }
+        },
+        {
+          "text": "771.\n\nInternational business trips require approval from the employee's manager and the business unit before travel is booked.\n\nItemized receipts are required for reimbursable travel expenses. Card statements alone are insufficient evidence for reimbursement.\n\nEmployees must submit itemized receipts within thirty calendar days of travel. The manager must verify the business purpose before approvin",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 4,
+            "section_heading": "Internal Operations Handbook > Access and Security > Incident Reporting",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Incident Reporting"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "International Travel"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Travel Receipts"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Reimbursement Rules"
+              ]
+            ],
+            "start_char": 1400,
+            "end_char": 1800
+          }
+        },
+        {
+          "text": "r must verify the business purpose before approving reimbursement. If a receipt is missing, attach a signed explanation and obtain finance approval; a manager's approval alone does not waive the receipt requirement.\n\n- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the ",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 5,
+            "section_heading": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Reimbursement Rules"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Approval Checklist"
+              ]
+            ],
+            "start_char": 1750,
+            "end_char": 2150
+          }
+        },
+        {
+          "text": "INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.\n\n| Priority | First response | Escalation owner |\n| P1 | 15 minutes | On-call lead |\n| P2 | 4 business hours | Service desk |\n| P3 | 2 business days | Team coordinator |\n\nResponse targets measure initial acknowledgement, not final resolution. The escalation owner must document any change in priority in the ticket.\n\n1",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 6,
+            "section_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Approval Checklist"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Response Targets"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Shift Handoff"
+              ]
+            ],
+            "start_char": 2100,
+            "end_char": 2500
+          }
+        },
+        {
+          "text": " document any change in priority in the ticket.\n\n1. Record unresolved incidents and their current owners.\n2. List the next action for each incident.\n3. Confirm that the incoming responder can access the incident log.\n\nUse the following template without including secrets:\n\nincident_id: OPS-123\nowner: incoming-responder\nnext_action: verify service recovery\n\nThe outgoing responder remains responsible",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 7,
+            "section_heading": "Internal Operations Handbook > Service Operations > Response Targets",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Response Targets"
+              ],
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Shift Handoff"
+              ]
+            ],
+            "start_char": 2450,
+            "end_char": 2850
+          }
+        },
+        {
+          "text": "covery\n\nThe outgoing responder remains responsible until the incoming responder acknowledges the handoff.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 8,
+            "section_heading": "Internal Operations Handbook > Service Operations > Shift Handoff",
+            "chunk_strategy": "fixed_size",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Shift Handoff"
+              ]
+            ],
+            "start_char": 2800,
+            "end_char": 2905
+          }
+        }
+      ]
+    },
+    "structural": {
+      "chunk_count": 11,
+      "min_characters": 78,
+      "max_characters": 550,
+      "mean_characters": 262.3,
+      "chunks_over_fixed_size_target": 2,
+      "checks": [
+        {
+          "test": "1 - Boundary preservation",
+          "status": "PASS",
+          "evidence": {
+            "rule": "Temporary access must be requested through the service desk with a named owner, a business reason, and an expiry date. The owner must confirm that the requested permissions are limited to the systems required for the assignment. Security reviews the request before any credentials are issued. Temporary access expires after seven calendar days. Extensions require a new approval before the original expiry; an open support ticket does not extend access automatically. When the assignment ends early, the owner must request revocation on the same day.",
+            "rule_characters": 550,
+            "intersecting_chunks": [
+              3
+            ],
+            "chunks_with_complete_rule": [
+              3
+            ],
+            "finding": "Complete rule and expiry exception stay together."
+          }
+        },
+        {
+          "test": "2 - Heading relationship",
+          "status": "PASS",
+          "evidence": {
+            "expected_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+            "chunks": [
+              8
+            ],
+            "reconstructed_paths": {
+              "8": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Approval Checklist"
+                ]
+              ]
+            },
+            "finding": "Heading paths reconstruct the parent context, including crossed sections."
+          }
+        },
+        {
+          "test": "3 - Small detail",
+          "status": "PASS",
+          "evidence": {
+            "detail": "Emergency contact: extension 771.",
+            "chunks_with_complete_detail": [
+              4
+            ],
+            "containing_chunk_lengths": [
+              341
+            ],
+            "detail_fraction": [
+              0.097
+            ],
+            "finding": "Detail retained with surrounding incident context."
+          }
+        },
+        {
+          "test": "4 - Overlap duplication",
+          "status": "PASS",
+          "evidence": {
+            "repeated_characters": 0,
+            "fraction_of_emitted_characters": 0.0,
+            "neighbor_pairs": [
+              {
+                "chunks": [
+                  0,
+                  1
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  1,
+                  2
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  2,
+                  3
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  3,
+                  4
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  4,
+                  5
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  5,
+                  6
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  6,
+                  7
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  7,
+                  8
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  8,
+                  9
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              },
+              {
+                "chunks": [
+                  9,
+                  10
+                ],
+                "repeated_characters": 0,
+                "repeated_text": ""
+              }
+            ],
+            "finding": "No duplicated characters; whole sections supply context."
+          }
+        },
+        {
+          "test": "5 - Metadata",
+          "status": "PASS",
+          "evidence": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 4,
+            "section_heading": "Internal Operations Handbook > Access and Security > Incident Reporting",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Incident Reporting"
+              ]
+            ],
+            "start_char": 1063,
+            "end_char": 1404
+          }
+        },
+        {
+          "test": "6 - Mixed structure",
+          "status": "PASS",
+          "evidence": {
+            "blocks": [
+              {
+                "heading": "Response Targets",
+                "kind": "table",
+                "parsed_text": "| Priority | First response | Escalation owner |\n| P1 | 15 minutes | On-call lead |\n| P2 | 4 business hours | Service desk |\n| P3 | 2 business days | Team coordinator |",
+                "chunks_preserving_entire_block": [
+                  9
+                ]
+              },
+              {
+                "heading": "Approval Checklist",
+                "kind": "list",
+                "parsed_text": "- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.",
+                "chunks_preserving_entire_block": [
+                  8
+                ]
+              }
+            ],
+            "finding": "Whole tables retain column labels; whole lists retain item relationships."
+          }
+        }
+      ],
+      "chunks": [
+        {
+          "text": "This fictional handbook describes everyday operating rules for Northstar Labs. It is a training document, not an actual organizational policy. Team members should use the section headings to locate the rule that applies to their work.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 0,
+            "section_heading": "Internal Operations Handbook",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook"
+              ]
+            ],
+            "start_char": 0,
+            "end_char": 234
+          }
+        },
+        {
+          "text": "Employees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive days requires manager approval.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 1,
+            "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Human Resources",
+                "Annual Leave"
+              ]
+            ],
+            "start_char": 236,
+            "end_char": 429
+          }
+        },
+        {
+          "text": "Employees taking sick leave should notify their manager as early as practical.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 2,
+            "section_heading": "Internal Operations Handbook > Human Resources > Sick Leave",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Human Resources",
+                "Sick Leave"
+              ]
+            ],
+            "start_char": 431,
+            "end_char": 509
+          }
+        },
+        {
+          "text": "Temporary access must be requested through the service desk with a named owner, a business reason, and an expiry date. The owner must confirm that the requested permissions are limited to the systems required for the assignment. Security reviews the request before any credentials are issued. Temporary access expires after seven calendar days. Extensions require a new approval before the original expiry; an open support ticket does not extend access automatically. When the assignment ends early, the owner must request revocation on the same day.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 3,
+            "section_heading": "Internal Operations Handbook > Access and Security > Temporary Access",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Temporary Access"
+              ]
+            ],
+            "start_char": 511,
+            "end_char": 1061
+          }
+        },
+        {
+          "text": "Report suspected credential exposure immediately to the service desk. Include the affected system and the time of discovery, but never paste a password or access token into the ticket. Security coordinates containment and records the actions taken so that the next responder can continue the investigation.\n\nEmergency contact: extension 771.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 4,
+            "section_heading": "Internal Operations Handbook > Access and Security > Incident Reporting",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Access and Security",
+                "Incident Reporting"
+              ]
+            ],
+            "start_char": 1063,
+            "end_char": 1404
+          }
+        },
+        {
+          "text": "International business trips require approval from the employee's manager and the business unit before travel is booked.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 5,
+            "section_heading": "Internal Operations Handbook > Travel and Expenses > International Travel",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "International Travel"
+              ]
+            ],
+            "start_char": 1406,
+            "end_char": 1526
+          }
+        },
+        {
+          "text": "Itemized receipts are required for reimbursable travel expenses. Card statements alone are insufficient evidence for reimbursement.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 6,
+            "section_heading": "Internal Operations Handbook > Travel and Expenses > Travel Receipts",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Travel Receipts"
+              ]
+            ],
+            "start_char": 1528,
+            "end_char": 1659
+          }
+        },
+        {
+          "text": "Employees must submit itemized receipts within thirty calendar days of travel. The manager must verify the business purpose before approving reimbursement. If a receipt is missing, attach a signed explanation and obtain finance approval; a manager's approval alone does not waive the receipt requirement.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 7,
+            "section_heading": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Reimbursement Rules"
+              ]
+            ],
+            "start_char": 1661,
+            "end_char": 1965
+          }
+        },
+        {
+          "text": "- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 8,
+            "section_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Travel and Expenses",
+                "Approval Checklist"
+              ]
+            ],
+            "start_char": 1967,
+            "end_char": 2181
+          }
+        },
+        {
+          "text": "| Priority | First response | Escalation owner |\n| P1 | 15 minutes | On-call lead |\n| P2 | 4 business hours | Service desk |\n| P3 | 2 business days | Team coordinator |\n\nResponse targets measure initial acknowledgement, not final resolution. The escalation owner must document any change in priority in the ticket.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 9,
+            "section_heading": "Internal Operations Handbook > Service Operations > Response Targets",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Response Targets"
+              ]
+            ],
+            "start_char": 2183,
+            "end_char": 2497
+          }
+        },
+        {
+          "text": "1. Record unresolved incidents and their current owners.\n2. List the next action for each incident.\n3. Confirm that the incoming responder can access the incident log.\n\nUse the following template without including secrets:\n\nincident_id: OPS-123\nowner: incoming-responder\nnext_action: verify service recovery\n\nThe outgoing responder remains responsible until the incoming responder acknowledges the handoff.",
+          "metadata": {
+            "source_document": "sample_doc.md",
+            "chunk_index": 10,
+            "section_heading": "Internal Operations Handbook > Service Operations > Shift Handoff",
+            "chunk_strategy": "structural",
+            "heading_paths": [
+              [
+                "Internal Operations Handbook",
+                "Service Operations",
+                "Shift Handoff"
+              ]
+            ],
+            "start_char": 2499,
+            "end_char": 2905
+          }
+        }
+      ]
+    }
+  }
+}

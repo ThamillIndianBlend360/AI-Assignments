@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "source_document": "sample_doc.md",
+  "rubric": "Case-specific evidence checks plus manual review. Exact quotations establish provenance, not answer relevance or completeness. No LLM judge.",
+  "cases": [
+    {
+      "id": "D08-01", "category": "direct_fact",
+      "question": "How many annual leave days do employees receive each year?",
+      "expected_behavior": "supported", "expected_answer": "24 paid annual leave days per calendar year, with citation.",
+      "evidence_groups": [[{"section": "Annual Leave", "text": "Employees receive 24 days of paid annual leave per calendar year."}]],
+      "risk": "medium", "prohibited_claims": ["Any entitlement other than 24 days."]
+    },
+    {
+      "id": "D08-02", "category": "paraphrase",
+      "question": "How many vacation days do employees get?",
+      "expected_behavior": "supported", "expected_answer": "Same 24-day annual leave entitlement despite the paraphrase.",
+      "evidence_groups": [[{"section": "Annual Leave", "text": "Employees receive 24 days of paid annual leave per calendar year."}]],
+      "risk": "medium", "prohibited_claims": ["A separate invented vacation allowance."]
+    },
+    {
+      "id": "D08-03", "category": "conditional_rule",
+      "question": "I want five consecutive days off. Do I need approval?",
+      "expected_behavior": "supported", "expected_answer": "State the annual-leave rule: more than three consecutive days requires manager approval. Preserve its annual-leave scope.",
+      "evidence_groups": [[{"section": "Annual Leave", "text": "Annual leave longer than three consecutive days requires manager approval."}]],
+      "risk": "high", "prohibited_claims": ["No approval is required.", "The annual-leave rule applies to every type of absence."]
+    },
+    {
+      "id": "D08-04", "category": "multi_part_approval",
+      "question": "Who approves an international business trip?",
+      "expected_behavior": "supported", "expected_answer": "Employee manager AND business unit, before booking.",
+      "evidence_groups": [[{"section": "International Travel", "text": "International business trips require approval from the employee's manager and the business unit before travel is booked."}]],
+      "risk": "high", "prohibited_claims": ["VP approval instead of the documented approvers.", "Only one of the two approvers."]
+    },
+    {
+      "id": "D08-05", "category": "missing_detail",
+      "question": "What is the exact monetary threshold above which receipts are required?",
+      "expected_behavior": "missing_detail", "expected_answer": "Explicitly state insufficient evidence for an exact monetary threshold. General receipt requirements may be included. INR 10,000 concerns finance approval, not receipt requirements.",
+      "evidence_groups": [], "relevant_sections": ["Travel Receipts", "Approval Checklist", "Reimbursement Rules"],
+      "missing_topic": "monetary threshold", "forbidden_answer_patterns": ["(?i)INR\\s*[0-9,]+", "\\b10,?000\\b"],
+      "risk": "high", "prohibited_claims": ["INR 10,000 is the receipt threshold.", "Any invented exact monetary threshold."]
+    },
+    {
+      "id": "D08-06", "category": "unsupported_policy",
+      "question": "What is the parental leave duration?",
+      "expected_behavior": "unsupported", "expected_answer": "The available evidence does not provide enough information. No citations or invented duration.",
+      "evidence_groups": [], "missing_topic": "parental leave",
+      "risk": "high", "prohibited_claims": ["Any parental-leave duration taken from model memory."]
+    },
+    {
+      "id": "D08-07", "category": "supported_plus_unsupported",
+      "question": "Compare annual leave and parental leave duration.",
+      "expected_behavior": "partial", "expected_answer": "Give the 24-day annual entitlement with citation AND explicitly identify missing parental-leave duration evidence.",
+      "evidence_groups": [[{"section": "Annual Leave", "text": "Employees receive 24 days of paid annual leave per calendar year."}]],
+      "missing_topic": "parental leave", "risk": "high",
+      "prohibited_claims": ["An invented parental-leave duration.", "A complete answer claim that silently ignores parental leave."]
+    },
+    {
+      "id": "D08-08", "category": "exact_terminology",
+      "question": "What does the Sick Leave section require employees to do?",
+      "expected_behavior": "supported", "expected_answer": "Notify the manager as early as practical.",
+      "evidence_groups": [[{"section": "Sick Leave", "text": "Employees taking sick leave should notify their manager as early as practical."}]],
+      "risk": "medium", "prohibited_claims": ["An invented medical-certificate, paid-days, or approval requirement."]
+    },
+    {
+      "id": "D08-09", "category": "expense_receipts",
+      "question": "When are receipts required for reimbursable travel expenses?",
+      "expected_behavior": "supported", "expected_answer": "Itemized receipts are required for reimbursable travel expenses; do not invent a receipt threshold.",
+      "evidence_groups": [[{"section": "Travel Receipts", "text": "Itemized receipts are required for reimbursable travel expenses."}, {"section": "Approval Checklist", "text": "- Attach itemized receipts; card statements alone are insufficient."}]],
+      "risk": "medium", "prohibited_claims": ["A numeric receipt threshold not stated by the document."]
+    },
+    {
+      "id": "D08-10", "category": "supported_comparison",
+      "question": "Compare annual leave and sick leave approval requirements.",
+      "expected_behavior": "supported", "expected_answer": "Annual leave longer than three days requires manager approval; sick leave requires early notification. Do not turn notification into approval or claim that approval is never required.",
+      "evidence_groups": [[{"section": "Annual Leave", "text": "Annual leave longer than three consecutive days requires manager approval."}], [{"section": "Sick Leave", "text": "Employees taking sick leave should notify their manager as early as practical."}]],
+      "risk": "high", "prohibited_claims": ["Notification equals approval.", "Sick leave never requires approval."]
+    },
+    {
+      "id": "D08-11", "category": "policy_exception",
+      "question": "Does an open support ticket automatically extend temporary access?",
+      "expected_behavior": "supported", "expected_answer": "No automatic extension. A new approval is required before the original expiry.",
+      "evidence_groups": [[{"section": "Temporary Access", "text": "Extensions require a new approval before the original expiry; an open support ticket does not extend access automatically."}]],
+      "risk": "high", "prohibited_claims": ["An open ticket automatically extends access."]
+    },
+    {
+      "id": "D08-12", "category": "boundary_condition",
+      "question": "For exactly three consecutive days of annual leave, does the more-than-three-days manager approval rule apply?",
+      "expected_behavior": "supported", "expected_answer": "Preserve the strict longer-than-three-days threshold. The clause does not establish an approval requirement at exactly three days, nor a blanket exemption from every other rule.",
+      "evidence_groups": [[{"section": "Annual Leave", "text": "Annual leave longer than three consecutive days requires manager approval."}]],
+      "risk": "high", "prohibited_claims": ["More than three means three or more.", "Exactly three days is exempt from all approval requirements."]
+    }
+  ]
+}

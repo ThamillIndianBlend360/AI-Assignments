@@ -1,0 +1,182 @@
+{
+  "controlled_comparison": true,
+  "changed_variable": "Response contract for explicit missing parts; retrieval, source, model, and decoding options fixed.",
+  "baseline": {
+    "total": 12,
+    "passed": 9,
+    "failed": [
+      "D08-05",
+      "D08-07",
+      "D08-11"
+    ],
+    "failure_categories": {
+      "missing_evidence_handling": 2,
+      "answer_relevance": 3
+    },
+    "check_failures": {
+      "retrieval_success": 0,
+      "context_preserved": 0,
+      "answer_grounded": 0,
+      "answer_relevant": 3,
+      "citation_support": 0,
+      "insufficient_evidence_handling": 2
+    }
+  },
+  "improved": {
+    "total": 12,
+    "passed": 6,
+    "failed": [
+      "D08-03",
+      "D08-05",
+      "D08-06",
+      "D08-07",
+      "D08-10",
+      "D08-11"
+    ],
+    "failure_categories": {
+      "output_validation": 4,
+      "citation": 4,
+      "groundedness": 4,
+      "missing_evidence_handling": 3,
+      "answer_relevance": 2
+    },
+    "check_failures": {
+      "retrieval_success": 0,
+      "context_preserved": 0,
+      "answer_grounded": 4,
+      "answer_relevant": 6,
+      "citation_support": 4,
+      "insufficient_evidence_handling": 3
+    }
+  },
+  "cases": [
+    {
+      "id": "D08-01",
+      "transition": "unchanged",
+      "baseline_passed": true,
+      "improved_passed": true,
+      "baseline_failures": [],
+      "improved_failures": []
+    },
+    {
+      "id": "D08-02",
+      "transition": "unchanged",
+      "baseline_passed": true,
+      "improved_passed": true,
+      "baseline_failures": [],
+      "improved_failures": []
+    },
+    {
+      "id": "D08-03",
+      "transition": "regressed",
+      "baseline_passed": true,
+      "improved_passed": false,
+      "baseline_failures": [],
+      "improved_failures": [
+        "output_validation",
+        "citation",
+        "groundedness"
+      ]
+    },
+    {
+      "id": "D08-04",
+      "transition": "unchanged",
+      "baseline_passed": true,
+      "improved_passed": true,
+      "baseline_failures": [],
+      "improved_failures": []
+    },
+    {
+      "id": "D08-05",
+      "transition": "unchanged",
+      "baseline_passed": false,
+      "improved_passed": false,
+      "baseline_failures": [
+        "missing_evidence_handling",
+        "answer_relevance"
+      ],
+      "improved_failures": [
+        "missing_evidence_handling",
+        "answer_relevance"
+      ]
+    },
+    {
+      "id": "D08-06",
+      "transition": "regressed",
+      "baseline_passed": true,
+      "improved_passed": false,
+      "baseline_failures": [],
+      "improved_failures": [
+        "output_validation",
+        "citation",
+        "groundedness",
+        "missing_evidence_handling"
+      ]
+    },
+    {
+      "id": "D08-07",
+      "transition": "unchanged",
+      "baseline_passed": false,
+      "improved_passed": false,
+      "baseline_failures": [
+        "missing_evidence_handling",
+        "answer_relevance"
+      ],
+      "improved_failures": [
+        "output_validation",
+        "citation",
+        "groundedness",
+        "missing_evidence_handling"
+      ]
+    },
+    {
+      "id": "D08-08",
+      "transition": "unchanged",
+      "baseline_passed": true,
+      "improved_passed": true,
+      "baseline_failures": [],
+      "improved_failures": []
+    },
+    {
+      "id": "D08-09",
+      "transition": "unchanged",
+      "baseline_passed": true,
+      "improved_passed": true,
+      "baseline_failures": [],
+      "improved_failures": []
+    },
+    {
+      "id": "D08-10",
+      "transition": "regressed",
+      "baseline_passed": true,
+      "improved_passed": false,
+      "baseline_failures": [],
+      "improved_failures": [
+        "answer_relevance"
+      ]
+    },
+    {
+      "id": "D08-11",
+      "transition": "unchanged",
+      "baseline_passed": false,
+      "improved_passed": false,
+      "baseline_failures": [
+        "answer_relevance"
+      ],
+      "improved_failures": [
+        "output_validation",
+        "citation",
+        "groundedness"
+      ]
+    },
+    {
+      "id": "D08-12",
+      "transition": "unchanged",
+      "baseline_passed": true,
+      "improved_passed": true,
+      "baseline_failures": [],
+      "improved_failures": []
+    }
+  ],
+  "limits": "One run per variant on a small synthetic corpus; no claim of statistical significance or production readiness."
+}

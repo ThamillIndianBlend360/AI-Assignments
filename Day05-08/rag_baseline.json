@@ -1,0 +1,465 @@
+{
+  "model": "llama3",
+  "top_k": 3,
+  "corpus": "Existing hardcoded passages in day05/retriever.py; not loaded from sample_doc.md",
+  "test_pdf_differences": [
+    "Current international travel passage specifies VP approval; PDF expects manager plus business-unit approval.",
+    "Current expense passage explicitly specifies INR 1,000; preserve this rather than inventing a different rule.",
+    "Current sick leave passage specifies 12 paid days and a medical certificate after 3 days; it omits manager notification."
+  ],
+  "experiment": "Compare evidence coverage at K=1 and the selected K using the same ranked results.",
+  "cases": [
+    {
+      "case": "Semantic paraphrase",
+      "expected_source_ids": [
+        0
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "How many vacation days do employees receive each year?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 0,
+            "score": 0.5220109224319458,
+            "text": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. Leave must be requested two weeks in advance.",
+            "metadata": {
+              "section": "Human Resources > Annual Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 4,
+            "score": 0.48268136382102966,
+            "text": "Internal Operations Handbook > Health and Safety > Sick Leave: Employees are granted 12 paid sick days per year. Medical certificates are required for absences exceeding 3 consecutive days.",
+            "metadata": {
+              "section": "Health and Safety > Sick Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 1,
+            "score": 0.2817181944847107,
+            "text": "Internal Operations Handbook > Human Resources > Extended Leave: For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required.",
+            "metadata": {
+              "section": "Human Resources > Extended Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "Employees receive 24 days of paid annual leave per calendar year. [Source ID: 0]",
+        "citations": [
+          "Source ID: 0"
+        ],
+        "evidence": [
+          {
+            "claim": "Employees receive 24 days of paid annual leave per calendar year.",
+            "chunk_id": 0,
+            "quote": "Employees receive 24 days of paid annual leave per calendar year."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Rule reasoning",
+      "expected_source_ids": [
+        1
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "generation_or_citation",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "I want to take five consecutive days of annual leave. Do I need manager approval?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 1,
+            "score": 0.6115602254867554,
+            "text": "Internal Operations Handbook > Human Resources > Extended Leave: For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required.",
+            "metadata": {
+              "section": "Human Resources > Extended Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 0,
+            "score": 0.5233746767044067,
+            "text": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. Leave must be requested two weeks in advance.",
+            "metadata": {
+              "section": "Human Resources > Annual Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 4,
+            "score": 0.47824618220329285,
+            "text": "Internal Operations Handbook > Health and Safety > Sick Leave: Employees are granted 12 paid sick days per year. Medical certificates are required for absences exceeding 3 consecutive days.",
+            "metadata": {
+              "section": "Health and Safety > Sick Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "Manager approval is not required for annual leave. [Source ID: 0]",
+        "citations": [
+          "Source ID: 0"
+        ],
+        "evidence": [
+          {
+            "claim": "Manager approval is not required for annual leave.",
+            "chunk_id": 0,
+            "quote": "Leave must be requested two weeks in advance."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "International travel",
+      "expected_source_ids": [
+        2
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "Who needs to approve an international business trip?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 2,
+            "score": 0.6584568023681641,
+            "text": "Internal Operations Handbook > Travel and Expenses > International Travel: All overseas business trips require VP approval and a submitted itinerary 30 days prior.",
+            "metadata": {
+              "section": "Travel and Expenses > International Travel",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 3,
+            "score": 0.43422698974609375,
+            "text": "Internal Operations Handbook > Travel and Expenses > Approval Checklist: Itemized receipts are required for all travel expenses exceeding INR 1,000. Card statements alone are insufficient.",
+            "metadata": {
+              "section": "Travel and Expenses > Approval Checklist",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 1,
+            "score": 0.16248127818107605,
+            "text": "Internal Operations Handbook > Human Resources > Extended Leave: For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required.",
+            "metadata": {
+              "section": "Human Resources > Extended Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "VP [Source ID: 2] VP [Source ID: 2]",
+        "citations": [
+          "Source ID: 2"
+        ],
+        "evidence": [
+          {
+            "claim": "VP",
+            "chunk_id": 2,
+            "quote": "All overseas business trips require VP approval"
+          },
+          {
+            "claim": "VP",
+            "chunk_id": 2,
+            "quote": "All overseas business trips require VP approval"
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Expense evidence",
+      "expected_source_ids": [
+        3
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "When are receipts required for reimbursable travel expenses?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 3,
+            "score": 0.7185819149017334,
+            "text": "Internal Operations Handbook > Travel and Expenses > Approval Checklist: Itemized receipts are required for all travel expenses exceeding INR 1,000. Card statements alone are insufficient.",
+            "metadata": {
+              "section": "Travel and Expenses > Approval Checklist",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 2,
+            "score": 0.3438870310783386,
+            "text": "Internal Operations Handbook > Travel and Expenses > International Travel: All overseas business trips require VP approval and a submitted itinerary 30 days prior.",
+            "metadata": {
+              "section": "Travel and Expenses > International Travel",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 0,
+            "score": 0.24205544590950012,
+            "text": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. Leave must be requested two weeks in advance.",
+            "metadata": {
+              "section": "Human Resources > Annual Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "Receipts are required for reimbursable travel expenses exceeding INR 1,000. [Source ID: 3]",
+        "citations": [
+          "Source ID: 3"
+        ],
+        "evidence": [
+          {
+            "claim": "Receipts are required for reimbursable travel expenses exceeding INR 1,000.",
+            "chunk_id": 3,
+            "quote": "Itemized receipts are required for all travel expenses exceeding INR 1,000."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Sick leave",
+      "expected_source_ids": [
+        4
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "What should an employee do when taking sick leave?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 4,
+            "score": 0.6258115768432617,
+            "text": "Internal Operations Handbook > Health and Safety > Sick Leave: Employees are granted 12 paid sick days per year. Medical certificates are required for absences exceeding 3 consecutive days.",
+            "metadata": {
+              "section": "Health and Safety > Sick Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 0,
+            "score": 0.36338183283805847,
+            "text": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. Leave must be requested two weeks in advance.",
+            "metadata": {
+              "section": "Human Resources > Annual Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 1,
+            "score": 0.32264095544815063,
+            "text": "Internal Operations Handbook > Human Resources > Extended Leave: For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required.",
+            "metadata": {
+              "section": "Human Resources > Extended Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "Employees are granted 12 paid sick days per year. [Source ID: 4] Medical certificates are required for absences exceeding 3 consecutive days. [Source ID: 4]",
+        "citations": [
+          "Source ID: 4"
+        ],
+        "evidence": [
+          {
+            "claim": "Employees are granted 12 paid sick days per year.",
+            "chunk_id": 4,
+            "quote": "Employees are granted 12 paid sick days per year."
+          },
+          {
+            "claim": "Medical certificates are required for absences exceeding 3 consecutive days.",
+            "chunk_id": 4,
+            "quote": "Medical certificates are required for absences exceeding 3 consecutive days."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Unsupported",
+      "expected_source_ids": [],
+      "expected_evidence_found": null,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": null,
+        "candidate_evidence_found": null
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "What is the company's parental leave duration?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 0,
+            "score": 0.5206875205039978,
+            "text": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. Leave must be requested two weeks in advance.",
+            "metadata": {
+              "section": "Human Resources > Annual Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 1,
+            "score": 0.49803221225738525,
+            "text": "Internal Operations Handbook > Human Resources > Extended Leave: For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required.",
+            "metadata": {
+              "section": "Human Resources > Extended Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 4,
+            "score": 0.41108062863349915,
+            "text": "Internal Operations Handbook > Health and Safety > Sick Leave: Employees are granted 12 paid sick days per year. Medical certificates are required for absences exceeding 3 consecutive days.",
+            "metadata": {
+              "section": "Health and Safety > Sick Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "The available evidence does not provide enough information.",
+        "citations": [],
+        "evidence": [],
+        "status": "insufficient_evidence"
+      }
+    },
+    {
+      "case": "Mixed evidence",
+      "expected_source_ids": [
+        1,
+        4
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": false,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review each answer against its quoted evidence; ID/quote checks do not prove entailment.",
+      "response": {
+        "question": "Compare annual leave and sick leave approval requirements.",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 4,
+            "score": 0.5795917510986328,
+            "text": "Internal Operations Handbook > Health and Safety > Sick Leave: Employees are granted 12 paid sick days per year. Medical certificates are required for absences exceeding 3 consecutive days.",
+            "metadata": {
+              "section": "Health and Safety > Sick Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 1,
+            "score": 0.41771453619003296,
+            "text": "Internal Operations Handbook > Human Resources > Extended Leave: For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required.",
+            "metadata": {
+              "section": "Human Resources > Extended Leave",
+              "strategy": "structural"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 0,
+            "score": 0.4150698781013489,
+            "text": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. Leave must be requested two weeks in advance.",
+            "metadata": {
+              "section": "Human Resources > Annual Leave",
+              "strategy": "structural"
+            }
+          }
+        ],
+        "answer": "Annual leave requires advance notice, while sick leave does not. [Source ID: 0] Manager approval is required for sick leave, but not for annual leave. [Source ID: 1] Medical certificates are required for sick leave, but not for annual leave. [Source ID: 4]",
+        "citations": [
+          "Source ID: 0",
+          "Source ID: 1",
+          "Source ID: 4"
+        ],
+        "evidence": [
+          {
+            "claim": "Annual leave requires advance notice, while sick leave does not.",
+            "chunk_id": 0,
+            "quote": "Leave must be requested two weeks in advance."
+          },
+          {
+            "claim": "Manager approval is required for sick leave, but not for annual leave.",
+            "chunk_id": 1,
+            "quote": "For leave longer than three consecutive days, mandatory manager approval and HR sign-off are required."
+          },
+          {
+            "claim": "Medical certificates are required for sick leave, but not for annual leave.",
+            "chunk_id": 4,
+            "quote": "Medical certificates are required for absences exceeding 3 consecutive days."
+          }
+        ],
+        "status": "answered"
+      }
+    }
+  ],
+  "review_notes": {
+    "Rule reasoning": "Generation failure: unsupported statement that manager approval is not required.",
+    "Mixed evidence": "Generation failure: valid IDs and quotes accompany unsupported comparisons."
+  },
+  "purpose": "Historical baseline before source-file integration and extractive sentence selection; not current results."
+}

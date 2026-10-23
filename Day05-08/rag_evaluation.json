@@ -1,0 +1,768 @@
+{
+  "model": "llama3",
+  "top_k": 3,
+  "corpus": "day05/sample_doc.md via parser.py and structural chunking",
+  "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c",
+  "chunk_count": 11,
+  "improvement": "Replace unrestricted claim synthesis with validated source-sentence selection after the baseline invented approval comparisons. Historical baseline used an older corpus; scores are not directly comparable.",
+  "experiment": "Compare evidence coverage at K=1 and the selected K on the same current corpus.",
+  "cases": [
+    {
+      "case": "Semantic paraphrase",
+      "expected_sections": [
+        "Annual Leave"
+      ],
+      "expected_source_ids": [
+        1
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "How many vacation days do employees receive each year?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 1,
+            "score": 0.49119699001312256,
+            "text": "Employees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive days requires manager approval.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 1,
+              "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Annual Leave"
+                ]
+              ],
+              "start_char": 236,
+              "end_char": 429,
+              "section": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 2,
+            "score": 0.267528772354126,
+            "text": "Employees taking sick leave should notify their manager as early as practical.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 2,
+              "section_heading": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Sick Leave"
+                ]
+              ],
+              "start_char": 431,
+              "end_char": 509,
+              "section": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 7,
+            "score": 0.25851088762283325,
+            "text": "Employees must submit itemized receipts within thirty calendar days of travel. The manager must verify the business purpose before approving reimbursement. If a receipt is missing, attach a signed explanation and obtain finance approval; a manager's approval alone does not waive the receipt requirement.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 7,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Reimbursement Rules"
+                ]
+              ],
+              "start_char": 1661,
+              "end_char": 1965,
+              "section": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "Internal Operations Handbook > Human Resources > Annual Leave: Employees receive 24 days of paid annual leave per calendar year. [Source ID: 1]",
+        "citations": [
+          "Source ID: 1"
+        ],
+        "evidence": [
+          {
+            "claim": "Employees receive 24 days of paid annual leave per calendar year.",
+            "chunk_id": 1,
+            "quote": "Employees receive 24 days of paid annual leave per calendar year."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Rule reasoning",
+      "expected_sections": [
+        "Annual Leave"
+      ],
+      "expected_source_ids": [
+        1
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "I want to take five consecutive days of annual leave. Do I need manager approval?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 1,
+            "score": 0.5872536897659302,
+            "text": "Employees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive days requires manager approval.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 1,
+              "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Annual Leave"
+                ]
+              ],
+              "start_char": 236,
+              "end_char": 429,
+              "section": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 7,
+            "score": 0.35108739137649536,
+            "text": "Employees must submit itemized receipts within thirty calendar days of travel. The manager must verify the business purpose before approving reimbursement. If a receipt is missing, attach a signed explanation and obtain finance approval; a manager's approval alone does not waive the receipt requirement.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 7,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Reimbursement Rules"
+                ]
+              ],
+              "start_char": 1661,
+              "end_char": 1965,
+              "section": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 2,
+            "score": 0.32712632417678833,
+            "text": "Employees taking sick leave should notify their manager as early as practical.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 2,
+              "section_heading": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Sick Leave"
+                ]
+              ],
+              "start_char": 431,
+              "end_char": 509,
+              "section": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "Internal Operations Handbook > Human Resources > Annual Leave: Annual leave longer than three consecutive days requires manager approval. [Source ID: 1]",
+        "citations": [
+          "Source ID: 1"
+        ],
+        "evidence": [
+          {
+            "claim": "Annual leave longer than three consecutive days requires manager approval.",
+            "chunk_id": 1,
+            "quote": "Annual leave longer than three consecutive days requires manager approval."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "International travel",
+      "expected_sections": [
+        "International Travel"
+      ],
+      "expected_source_ids": [
+        5
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "Who needs to approve an international business trip?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 5,
+            "score": 0.7393831610679626,
+            "text": "International business trips require approval from the employee's manager and the business unit before travel is booked.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 5,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > International Travel",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "International Travel"
+                ]
+              ],
+              "start_char": 1406,
+              "end_char": 1526,
+              "section": "Internal Operations Handbook > Travel and Expenses > International Travel",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 8,
+            "score": 0.4773522913455963,
+            "text": "- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 8,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Approval Checklist"
+                ]
+              ],
+              "start_char": 1967,
+              "end_char": 2181,
+              "section": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 7,
+            "score": 0.3932332992553711,
+            "text": "Employees must submit itemized receipts within thirty calendar days of travel. The manager must verify the business purpose before approving reimbursement. If a receipt is missing, attach a signed explanation and obtain finance approval; a manager's approval alone does not waive the receipt requirement.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 7,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Reimbursement Rules"
+                ]
+              ],
+              "start_char": 1661,
+              "end_char": 1965,
+              "section": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "Internal Operations Handbook > Travel and Expenses > International Travel: International business trips require approval from the employee's manager and the business unit before travel is booked. [Source ID: 5]",
+        "citations": [
+          "Source ID: 5"
+        ],
+        "evidence": [
+          {
+            "claim": "International business trips require approval from the employee's manager and the business unit before travel is booked.",
+            "chunk_id": 5,
+            "quote": "International business trips require approval from the employee's manager and the business unit before travel is booked."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Expense evidence",
+      "expected_sections": [
+        "Travel Receipts"
+      ],
+      "expected_source_ids": [
+        6
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": false,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "When are receipts required for reimbursable travel expenses?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 7,
+            "score": 0.8246840834617615,
+            "text": "Employees must submit itemized receipts within thirty calendar days of travel. The manager must verify the business purpose before approving reimbursement. If a receipt is missing, attach a signed explanation and obtain finance approval; a manager's approval alone does not waive the receipt requirement.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 7,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Reimbursement Rules"
+                ]
+              ],
+              "start_char": 1661,
+              "end_char": 1965,
+              "section": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 6,
+            "score": 0.8220812082290649,
+            "text": "Itemized receipts are required for reimbursable travel expenses. Card statements alone are insufficient evidence for reimbursement.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 6,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Travel Receipts",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Travel Receipts"
+                ]
+              ],
+              "start_char": 1528,
+              "end_char": 1659,
+              "section": "Internal Operations Handbook > Travel and Expenses > Travel Receipts",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 8,
+            "score": 0.5779998302459717,
+            "text": "- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 8,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Approval Checklist"
+                ]
+              ],
+              "start_char": 1967,
+              "end_char": 2181,
+              "section": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "Internal Operations Handbook > Travel and Expenses > Reimbursement Rules: Employees must submit itemized receipts within thirty calendar days of travel. [Source ID: 7]\nInternal Operations Handbook > Travel and Expenses > Travel Receipts: Itemized receipts are required for reimbursable travel expenses. [Source ID: 6]\nInternal Operations Handbook > Travel and Expenses > Approval Checklist: - Attach itemized receipts; card statements alone are insufficient. [Source ID: 8]",
+        "citations": [
+          "Source ID: 7",
+          "Source ID: 6",
+          "Source ID: 8"
+        ],
+        "evidence": [
+          {
+            "claim": "Employees must submit itemized receipts within thirty calendar days of travel.",
+            "chunk_id": 7,
+            "quote": "Employees must submit itemized receipts within thirty calendar days of travel."
+          },
+          {
+            "claim": "Itemized receipts are required for reimbursable travel expenses.",
+            "chunk_id": 6,
+            "quote": "Itemized receipts are required for reimbursable travel expenses."
+          },
+          {
+            "claim": "- Attach itemized receipts; card statements alone are insufficient.",
+            "chunk_id": 8,
+            "quote": "- Attach itemized receipts; card statements alone are insufficient."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Sick leave",
+      "expected_sections": [
+        "Sick Leave"
+      ],
+      "expected_source_ids": [
+        2
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": true,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "What should an employee do when taking sick leave?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 2,
+            "score": 0.6893744468688965,
+            "text": "Employees taking sick leave should notify their manager as early as practical.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 2,
+              "section_heading": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Sick Leave"
+                ]
+              ],
+              "start_char": 431,
+              "end_char": 509,
+              "section": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 1,
+            "score": 0.3109455704689026,
+            "text": "Employees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive days requires manager approval.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 1,
+              "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Annual Leave"
+                ]
+              ],
+              "start_char": 236,
+              "end_char": 429,
+              "section": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 10,
+            "score": 0.1955024003982544,
+            "text": "1. Record unresolved incidents and their current owners.\n2. List the next action for each incident.\n3. Confirm that the incoming responder can access the incident log.\n\nUse the following template without including secrets:\n\nincident_id: OPS-123\nowner: incoming-responder\nnext_action: verify service recovery\n\nThe outgoing responder remains responsible until the incoming responder acknowledges the handoff.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 10,
+              "section_heading": "Internal Operations Handbook > Service Operations > Shift Handoff",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Service Operations",
+                  "Shift Handoff"
+                ]
+              ],
+              "start_char": 2499,
+              "end_char": 2905,
+              "section": "Internal Operations Handbook > Service Operations > Shift Handoff",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "Internal Operations Handbook > Human Resources > Sick Leave: Employees taking sick leave should notify their manager as early as practical. [Source ID: 2]",
+        "citations": [
+          "Source ID: 2"
+        ],
+        "evidence": [
+          {
+            "claim": "Employees taking sick leave should notify their manager as early as practical.",
+            "chunk_id": 2,
+            "quote": "Employees taking sick leave should notify their manager as early as practical."
+          }
+        ],
+        "status": "answered"
+      }
+    },
+    {
+      "case": "Unsupported",
+      "expected_sections": [],
+      "expected_source_ids": [],
+      "expected_evidence_found": null,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": null,
+        "candidate_evidence_found": null
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "What is the company's parental leave duration?",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 1,
+            "score": 0.4879528284072876,
+            "text": "Employees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive days requires manager approval.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 1,
+              "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Annual Leave"
+                ]
+              ],
+              "start_char": 236,
+              "end_char": 429,
+              "section": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 3,
+            "score": 0.2975262701511383,
+            "text": "Temporary access must be requested through the service desk with a named owner, a business reason, and an expiry date. The owner must confirm that the requested permissions are limited to the systems required for the assignment. Security reviews the request before any credentials are issued. Temporary access expires after seven calendar days. Extensions require a new approval before the original expiry; an open support ticket does not extend access automatically. When the assignment ends early, the owner must request revocation on the same day.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 3,
+              "section_heading": "Internal Operations Handbook > Access and Security > Temporary Access",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Access and Security",
+                  "Temporary Access"
+                ]
+              ],
+              "start_char": 511,
+              "end_char": 1061,
+              "section": "Internal Operations Handbook > Access and Security > Temporary Access",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 2,
+            "score": 0.2453193962574005,
+            "text": "Employees taking sick leave should notify their manager as early as practical.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 2,
+              "section_heading": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Sick Leave"
+                ]
+              ],
+              "start_char": 431,
+              "end_char": 509,
+              "section": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "The available evidence does not provide enough information.",
+        "citations": [],
+        "evidence": [],
+        "status": "insufficient_evidence"
+      }
+    },
+    {
+      "case": "Mixed evidence",
+      "expected_sections": [
+        "Annual Leave",
+        "Sick Leave"
+      ],
+      "expected_source_ids": [
+        1,
+        2
+      ],
+      "expected_evidence_found": true,
+      "top_k_experiment": {
+        "baseline_k": 1,
+        "candidate_k": 3,
+        "baseline_evidence_found": false,
+        "candidate_evidence_found": true
+      },
+      "failure_stage": "none_detected_by_automated_checks",
+      "semantic_review": "Review relevance and completeness; output statements are verbatim source sentences.",
+      "response": {
+        "question": "Compare annual leave and sick leave approval requirements.",
+        "retrieved_chunks": [
+          {
+            "rank": 1,
+            "chunk_id": 2,
+            "score": 0.5190926790237427,
+            "text": "Employees taking sick leave should notify their manager as early as practical.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 2,
+              "section_heading": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Sick Leave"
+                ]
+              ],
+              "start_char": 431,
+              "end_char": 509,
+              "section": "Internal Operations Handbook > Human Resources > Sick Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": 1,
+            "score": 0.4124717712402344,
+            "text": "Employees receive 24 days of paid annual leave per calendar year. Annual leave must be requested two weeks in advance. Annual leave longer than three consecutive days requires manager approval.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 1,
+              "section_heading": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Human Resources",
+                  "Annual Leave"
+                ]
+              ],
+              "start_char": 236,
+              "end_char": 429,
+              "section": "Internal Operations Handbook > Human Resources > Annual Leave",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": 8,
+            "score": 0.30346766114234924,
+            "text": "- Record the business purpose and cost center.\n- Attach itemized receipts; card statements alone are insufficient.\n- For claims over INR 10,000, obtain finance approval.\n- Submit the claim using the expense portal.",
+            "metadata": {
+              "source_document": "sample_doc.md",
+              "chunk_index": 8,
+              "section_heading": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+              "chunk_strategy": "structural",
+              "heading_paths": [
+                [
+                  "Internal Operations Handbook",
+                  "Travel and Expenses",
+                  "Approval Checklist"
+                ]
+              ],
+              "start_char": 1967,
+              "end_char": 2181,
+              "section": "Internal Operations Handbook > Travel and Expenses > Approval Checklist",
+              "strategy": "structural",
+              "source_sha256": "b5805f75a57fa716ffd50b1a0c8e7b022a5923240484d9ed5ab8a0610d55092c"
+            }
+          }
+        ],
+        "answer": "Internal Operations Handbook > Human Resources > Sick Leave: Employees taking sick leave should notify their manager as early as practical. [Source ID: 2]\nInternal Operations Handbook > Human Resources > Annual Leave: Annual leave longer than three consecutive days requires manager approval. [Source ID: 1]",
+        "citations": [
+          "Source ID: 2",
+          "Source ID: 1"
+        ],
+        "evidence": [
+          {
+            "claim": "Employees taking sick leave should notify their manager as early as practical.",
+            "chunk_id": 2,
+            "quote": "Employees taking sick leave should notify their manager as early as practical."
+          },
+          {
+            "claim": "Annual leave longer than three consecutive days requires manager approval.",
+            "chunk_id": 1,
+            "quote": "Annual leave longer than three consecutive days requires manager approval."
+          }
+        ],
+        "status": "answered"
+      }
+    }
+  ]
+}

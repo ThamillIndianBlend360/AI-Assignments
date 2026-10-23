@@ -1,0 +1,33 @@
+User: "Create a leave for Diwali and Dussehra"
+
+Loop 1
+  Thought:      I need the dates for Diwali and Dussehra before I can request leave.
+                I shouldn't rely on memory for these, so I'll look them up.
+  Action:       get_holidays(year=2026, name="Dussehra")
+  Observation:  Dussehra: 2026-10-20
+
+Loop 2
+  Thought:      Dussehra was 2026-10-20, but today is 2026-10-21, so it has already passed.
+                I should note that and check Diwali.
+  Action:       get_holidays(year=2026, name="Diwali")
+  Observation:  Diwali: 2026-11-08
+
+Loop 3
+  Thought:      Diwali is upcoming, so leave for it is valid. Before requesting anything,
+                I should check the balance to see whether there's enough leave.
+  Action:       get_leave_balance(employee_id="E123")
+  Observation:  Available leave: 3 days
+
+Loop 4
+  Thought:      The balance covers one day of leave. Dussehra has passed, so I'll only
+                request Diwali. I'll create the leave for 2026-11-08 and mention that
+                Dussehra was skipped.
+  Action:       create_leave_request(employee_id="E123",
+                                     start_date="2026-11-08", end_date="2026-11-08")
+  Observation:  Leave request created, ID LR-889, status: pending
+
+Loop 5
+  Thought:      The request succeeded, and I have what I need to answer the user.
+  Final Answer: I've submitted a leave request for Diwali (8 Nov 2026). Dussehra
+                was on 20 Oct, which has already passed, so I didn't request leave
+                for it. Your request is pending approval.

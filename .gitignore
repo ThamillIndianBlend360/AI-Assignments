@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Secrets and local configuration
+.env
+
+# Python caches and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local databases (Day 04 SQLite data is created at runtime)
+*.db
