@@ -18,6 +18,7 @@ Each folder holds that day's code and its reflection PDF.
 | [Day12/](Day12/) | `main.py`: a local leave-request demo with idempotency keys, deterministic balance enforcement, and Pydantic validation. Verifies duplicate replay, conflicting key reuse, insufficient balance, and invalid inputs. Appends events to `day12_audit_trail.log` in the project root. |
 | [Day13/](Day13/) | `test_harness.py`: a golden regression harness for the Day12 agent, with five cases covering valid leave requests, duplicate submissions, insufficient balance, balance lookup, and unknown festivals. Checks response phrases and reports pass rate and latency in `Day13/golden_test_results.json`. Also includes the engineering reflection PDF. Requires the Day12 agent components described below. |
 | [Day14/](Day14/) | `mcp_server.py`: a FastMCP server exposing leave-balance lookup and one-day leave creation over MCP stdio. Enforces available balance and replays duplicate requests by employee ID and date. Includes a VS Code connection in `.vscode/mcp.json`. |
+| [Day15/](Day15/) | `golden_dataset.jsonl`: 30 synthetic HR leave evaluation cases. `test_evaluation.py` checks dataset structure, Day14 tool results, final balances, and cached request counts with isolated state per case. Current baseline: 25 passed and 6 expected failures. LLM judging and human review remain unimplemented. |
 
 Each day's folder has its own `CLAUDE.md` or `readme.md` where one exists, with
 details for that assignment.
@@ -119,7 +120,21 @@ Tests:
 ```powershell
 python -m pytest Day04/test_main.py
 python -m unittest discover -s Day05-08 -p "test_*.py" -v
+python -m pytest Day15/test_evaluation.py -v -p no:cacheprovider
 ```
+
+Day15 evaluates Day14 functions directly, so it needs neither a running MCP
+server nor an LLM connection. Its baseline is **25 passed, 6 xfailed**: one
+dataset-contract check, 24 regression cases, and six known gaps covering invalid
+dates, blank reasons, and conflicting reasons on duplicate requests. `XFAIL`
+records missing target behavior; it does not mean that behavior passed.
+
+Add `--runxfail --tb=short` to report the six gaps as ordinary failures, or
+`--junitxml=Day15/evaluation_results.xml` to save an XML report. The current
+runner checks backend behavior; MCP transport, model answers, LLM judging, and
+human review are not evaluated. `judge.py`, `rubric.md`, and `human_labels.csv`
+remain empty placeholders. See [Day15/README.md](Day15/README.md) for the dataset
+format, evaluation workflow, and scoring guidance.
 
 RAG and chunking commands for Day 05-08 are in
 [Day05-08/readme.md](Day05-08/readme.md).
