@@ -15,6 +15,7 @@ Each folder holds that day's code and its reflection PDF.
 | [Day09/](Day09/) | Engineering reflection PDF on architecture strategy. No code. |
 | [Day10/](Day10/) | `main.py`: an enterprise HR assistant on Ollama with a read-only leave-balance tool and a write tool for leave requests. Pydantic validates tool arguments, and write actions need human confirmation (or `AUTO_CONFIRM_WRITES=true`). Writes `day10_execution.log`. Also includes the reflection PDF. |
 | [Day11/](Day11/) | `main.py`: a ReAct-style agent for leave requests that reasons, calls tools, and reports a final answer using Ollama. |
+| [Day12/](Day12/) | `main.py`: a local leave-request demo with idempotency keys, deterministic balance enforcement, and Pydantic validation. Verifies duplicate replay, conflicting key reuse, insufficient balance, and invalid inputs. Appends events to `day12_audit_trail.log` in the project root. |
 
 Each day's folder has its own `CLAUDE.md` or `readme.md` where one exists, with
 details for that assignment.
@@ -53,7 +54,13 @@ python Day03/reliability_test.py                      # reliability suite
 python Day10/main.py                                  # HR assistant (runs a sample leave request)
 python -m uvicorn Day04.main:app --reload             # API at http://127.0.0.1:8000/docs
 python Day11/main.py                                  # leave-request agent
+python Day12/main.py                                  # leave-request validation and audit trail demo
 ```
+
+Day12 runs without Ollama or an API key. It prints `PASS` messages for its checks
+and the location of `day12_audit_trail.log`. Balances and idempotency keys are
+stored in memory and reset each run; the audit log keeps entries from previous
+runs, grouped by a unique run ID.
 
 Tests:
 
