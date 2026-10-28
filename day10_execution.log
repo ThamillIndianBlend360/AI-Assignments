@@ -1,0 +1,2 @@
+2026-10-28 12:33:29,276 [INFO] User Query: My user ID is E101. Please submit a 3-day leave request starting 2026-11-10 for a personal trip.
+2026-10-28 12:34:24,637 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
