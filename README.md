@@ -17,6 +17,7 @@ Each folder holds that day's code and its reflection PDF.
 | [Day11/](Day11/) | `main.py`: a ReAct-style agent for leave requests that reasons, calls tools, and reports a final answer using Ollama. |
 | [Day12/](Day12/) | `main.py`: a local leave-request demo with idempotency keys, deterministic balance enforcement, and Pydantic validation. Verifies duplicate replay, conflicting key reuse, insufficient balance, and invalid inputs. Appends events to `day12_audit_trail.log` in the project root. |
 | [Day13/](Day13/) | `test_harness.py`: a golden regression harness for the Day12 agent, with five cases covering valid leave requests, duplicate submissions, insufficient balance, balance lookup, and unknown festivals. Checks response phrases and reports pass rate and latency in `Day13/golden_test_results.json`. Also includes the engineering reflection PDF. Requires the Day12 agent components described below. |
+| [Day14/](Day14/) | `mcp_server.py`: a FastMCP server exposing leave-balance lookup and one-day leave creation over MCP stdio. Enforces available balance and replays duplicate requests by employee ID and date. Includes a VS Code connection in `.vscode/mcp.json`. |
 
 Each day's folder has its own `CLAUDE.md` or `readme.md` where one exists, with
 details for that assignment.
@@ -57,6 +58,7 @@ python -m uvicorn Day04.main:app --reload             # API at http://127.0.0.1:
 python Day11/main.py                                  # leave-request agent
 python Day12/main.py                                  # leave-request validation and audit trail demo
 python -m Day13.test_harness                          # golden regression suite (requires Day12 agent components below)
+python Day14/mcp_server.py                            # MCP stdio server (waits for an MCP client)
 ```
 
 Day12 runs without Ollama or an API key. It prints `PASS` messages for its checks
@@ -71,6 +73,46 @@ Run the harness as a module from the project root so its `Day12` import resolves
 Once that dependency is satisfied, it runs the five cases in order, prints an
 evaluation summary, and writes `Day13/golden_test_results.json`. Its checks match
 phrases in agent responses; they do not directly verify backend state or schemas.
+
+Day14 exposes two tools through the Model Context Protocol (MCP):
+
+| Tool | Arguments | Behavior |
+| --- | --- | --- |
+| `get_available_leave_balance` | `user_id` | Returns the employee's name and leave balance, or `USER_NOT_FOUND`. |
+| `create_leave_request` | `user_id`, `date`, `reason` | Deducts one day if available; rejects insufficient balance and replays an existing request for the same employee and date without another deduction. |
+
+Install dependencies using the setup command above; `requirements.txt` includes
+FastMCP. The server itself needs no Ollama service or API key. Running it directly
+starts a stdio server that waits for MCP messages rather than opening a web page
+or an interactive prompt. Press Ctrl+C to stop a manually started instance.
+
+To test Day14 through GitHub Copilot in VS Code:
+
+1. Open this project root in VS Code. The workspace configuration is
+   [.vscode/mcp.json](.vscode/mcp.json), using `venv/Scripts/python.exe` to launch
+   `Day14/mcp_server.py` as `enterprise-hr-leave`.
+2. Open GitHub Copilot Chat inside VS Code, select Agent mode, and send a message
+   to initialize the chat session. If startup reports that the session runtime
+   has not been created, send a message before retrying Start.
+3. Open `.vscode/mcp.json` and click Start above `enterprise-hr-leave`. Let VS Code
+   launch the server; a separate terminal instance is unnecessary. Enable its
+   tools in Chat if needed, and approve tool calls when prompted.
+4. Ask Copilot to use the server for the following checks, in order. Expand the
+   tool calls to inspect the actual arguments and returned JSON.
+
+| Check | Request to make through Copilot | Expected result on a fresh server |
+| --- | --- | --- |
+| Balance lookup | Check E101's leave balance. | 3 days. |
+| Create leave | Create leave for E101 on 2026-11-10, reason: Personal trip. | Success; 2 days remain. |
+| Duplicate request | Call `create_leave_request` again with the same arguments. | `idempotent_replay: true`; balance stays at 2. |
+| Verify balance | Check E101's leave balance again. | 2 days. |
+| Balance guard | Create leave for E102 on 2026-11-10, reason: Personal trip. | `INSUFFICIENT_BALANCE`. |
+| Unknown employee | Check E999's leave balance. | `USER_NOT_FOUND`. |
+
+The flow is: Copilot prompt -> MCP tool call -> Python function -> JSON result
+-> Copilot response. Day14 uses its own in-memory demo data; balances and the
+duplicate-request cache reset whenever the server restarts. It does not write
+Day12's audit log.
 
 Tests:
 
