@@ -13,6 +13,7 @@ Each folder holds that day's code and its reflection PDF.
 | [Day04/](Day04/) | A FastAPI service with SQLite storage for tasks and customers. Includes CRUD routes, validation and pytest tests. |
 | [Day05-08/](Day05-08/) | Document pipeline and grounded RAG: Markdown parsing, chunking, embedding retrieval, and an Ollama-based answer generator with citations and evaluation scripts. |
 | [Day09/](Day09/) | Engineering reflection PDF on architecture strategy. No code. |
+| [Day10/](Day10/) | `main.py`: an enterprise HR assistant on Ollama with a read-only leave-balance tool and a write tool for leave requests. Pydantic validates tool arguments, and write actions need human confirmation (or `AUTO_CONFIRM_WRITES=true`). Writes `day10_execution.log`. Also includes the reflection PDF. |
 | [Day11/](Day11/) | `main.py`: a ReAct-style agent for leave requests that reasons, calls tools, and reports a final answer using Ollama. |
 
 Each day's folder has its own `CLAUDE.md` or `readme.md` where one exists, with
@@ -49,6 +50,7 @@ Run commands from the project root:
 python Day01/main.py                                  # chatbot
 python Day02/experiment.py                            # prompt comparison
 python Day03/reliability_test.py                      # reliability suite
+python Day10/main.py                                  # HR assistant (runs a sample leave request)
 python -m uvicorn Day04.main:app --reload             # API at http://127.0.0.1:8000/docs
 python Day11/main.py                                  # leave-request agent
 ```
