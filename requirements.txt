@@ -10,3 +10,4 @@ httpx>=0.24.0
 sentence-transformers>=2.2.0
 numpy>=1.24.0
 langsmith>=0.14.13
+fastmcp>=4.1.4,<5

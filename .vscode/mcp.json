@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "enterprise-hr-leave": {
+      "type": "stdio",
+      "command": "${workspaceFolder}/venv/Scripts/python.exe",
+      "args": [
+        "${workspaceFolder}/Day14/mcp_server.py"
+      ]
+    }
+  }
+}
