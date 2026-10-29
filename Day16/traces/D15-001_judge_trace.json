@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-001_1793291868",
+  "metadata": {
+    "case_id": "D15-001",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Check the leave balance for [EMPLOYEE_ID].",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately addresses the user's query, providing a simulated response for the employee leave balance check. The output is factual and does not contain any hallucinations, meeting the expected behavior and rubric criteria for Level 3 (Pass).",
+  "latency_s": 40.343
+}

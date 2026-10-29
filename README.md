@@ -18,7 +18,8 @@ Each folder holds that day's code and its reflection PDF.
 | [Day12/](Day12/) | `main.py`: a local leave-request demo with idempotency keys, deterministic balance enforcement, and Pydantic validation. Verifies duplicate replay, conflicting key reuse, insufficient balance, and invalid inputs. Appends events to `day12_audit_trail.log` in the project root. |
 | [Day13/](Day13/) | `test_harness.py`: a golden regression harness for the Day12 agent, with five cases covering valid leave requests, duplicate submissions, insufficient balance, balance lookup, and unknown festivals. Checks response phrases and reports pass rate and latency in `Day13/golden_test_results.json`. Also includes the engineering reflection PDF. Requires the Day12 agent components described below. |
 | [Day14/](Day14/) | `mcp_server.py`: a FastMCP server exposing leave-balance lookup and one-day leave creation over MCP stdio. Enforces available balance and replays duplicate requests by employee ID and date. Includes a VS Code connection in `.vscode/mcp.json`. |
-| [Day15/](Day15/) | `golden_dataset.jsonl`: 30 synthetic HR leave evaluation cases. `test_evaluation.py` checks dataset structure, Day14 tool results, final balances, and cached request counts with isolated state per case. Current baseline: 25 passed and 6 expected failures. LLM judging and human review remain unimplemented. |
+| [Day15/](Day15/) | `golden_dataset.jsonl`: 30 synthetic HR leave evaluation cases. `test_evaluation.py` checks dataset structure, Day14 tool results, final balances, and cached request counts with isolated state per case. Current baseline: 25 passed and 6 expected failures. `judge.py` is an Ollama-based LLM judge that writes `baseline_results.jsonl`; its output is not yet validated. Rubric and human review files are empty. |
+| [Day16/](Day16/) | AI observability demos: `instrumentation.py` records local traces with email and employee-ID masking and simulated retrieval/tool faults. `judge.py` uses Ollama to score simulated responses to the Day15 dataset, saving results and per-case traces. `check_langsmith.py` provides a LangSmith tracing smoke check. |
 
 Each day's folder has its own `CLAUDE.md` or `readme.md` where one exists, with
 details for that assignment.
@@ -60,6 +61,9 @@ python Day11/main.py                                  # leave-request agent
 python Day12/main.py                                  # leave-request validation and audit trail demo
 python -m Day13.test_harness                          # golden regression suite (requires Day12 agent components below)
 python Day14/mcp_server.py                            # MCP stdio server (waits for an MCP client)
+python Day16/instrumentation.py                       # local tracing and PII-masking demo
+python Day16/check_langsmith.py                       # LangSmith tracing smoke check
+python Day16/judge.py                                 # Ollama judge with local per-case traces
 ```
 
 Day12 runs without Ollama or an API key. It prints `PASS` messages for its checks
@@ -132,9 +136,33 @@ records missing target behavior; it does not mean that behavior passed.
 Add `--runxfail --tb=short` to report the six gaps as ordinary failures, or
 `--junitxml=Day15/evaluation_results.xml` to save an XML report. The current
 runner checks backend behavior; MCP transport, model answers, LLM judging, and
-human review are not evaluated. `judge.py`, `rubric.md`, and `human_labels.csv`
-remain empty placeholders. See [Day15/README.md](Day15/README.md) for the dataset
+human review are not evaluated. `judge.py` runs an Ollama LLM judge over the
+dataset and writes `Day15/baseline_results.jsonl`; its verdicts are not yet
+validated against human labels. `rubric.md` and `human_labels.csv` remain empty
+placeholders. See [Day15/README.md](Day15/README.md) for the dataset
 format, evaluation workflow, and scoring guidance.
+
+Day16's instrumentation demo runs without Ollama or LangSmith and writes
+`Day16/traces/D15-03_trace.json`. It records simulated retrieval, LLM, and tool
+steps, masking email addresses and employee IDs matching `E` plus three or four
+digits in the input. Its `trace_request` function accepts `slow_tool` (a
+three-second delay), `flaky_tool`, `mcp_error`, and `bad_retrieval` fault flags
+for debugging; the standalone command runs without a fault flag.
+
+The LangSmith smoke check loads the root `.env`, calls a function decorated with
+`traceable`, and prints `result: 5`. Configure LangSmith tracing and credentials
+in your environment to send that trace to LangSmith. The other Day16 scripts
+write local JSON files and do not send traces to LangSmith.
+
+Day16's judge requires a running Ollama service with `llama3` available, or the
+model selected by `OLLAMA_MODEL`. It reads `Day15/golden_dataset.jsonl` and
+overwrites `Day16/evaluation_results.jsonl` and matching
+`Day16/traces/<case_id>_judge_trace.json` files. These contain masked inputs,
+verdicts, reasons, model metadata (in traces), and latency. The assistant responses
+are simulated; the script does not execute the HR agent or its tools. It reads
+an optional `expected` field and otherwise uses a generic expected-behavior
+fallback. Parsing failures or execution errors can default to Level 3 (Pass),
+so these verdicts should not be treated as validated agent-quality scores.
 
 RAG and chunking commands for Day 05-08 are in
 [Day05-08/readme.md](Day05-08/readme.md).

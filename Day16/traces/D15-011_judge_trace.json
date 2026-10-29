@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-011_1793292049",
+  "metadata": {
+    "case_id": "D15-011",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Create leave for [EMPLOYEE_ID] on 2027-01-14 with reason Personal appointment.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately follows the policy and response rules, fully addressing the user's query and providing a simulated response for the leave creation. There are zero hallucinations, and the output is correct and accurate.",
+  "latency_s": 17.093
+}

@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-004_1793291923",
+  "metadata": {
+    "case_id": "D15-004",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Check the balance for e101.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately addresses the user's query, 'Check the balance for e101.', and provides a simulated response that meets the expected behavior and policy. There are no inaccuracies, hallucinations, or unconfirmed state mutations.",
+  "latency_s": 18.507
+}

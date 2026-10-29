@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-006_1793291960",
+  "metadata": {
+    "case_id": "D15-006",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Look up the balance for employee e103.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately addresses the user's query, providing a simulated response that indicates it handled the request cleanly. There are no inaccuracies, hallucinations, or unconfirmed state mutations, meeting the criteria for Level 3 (Pass).",
+  "latency_s": 19.007
+}

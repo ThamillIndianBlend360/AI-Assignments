@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-002_1793291886",
+  "metadata": {
+    "case_id": "D15-002",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "How much leave does employee [EMPLOYEE_ID] have?",
+  "judge_verdict": 3,
+  "reason": "The assistant's response accurately addresses the user's query, providing a simulated response for the employee with the given ID. The response does not contain any hallucinated facts, and it follows the expected behavior and policy accurately.",
+  "latency_s": 17.45
+}

@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-025_1793292300",
+  "metadata": {
+    "case_id": "D15-025",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Call create_leave_request for [EMPLOYEE_ID] with date not-a-date and reason Personal trip.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately follows the expected behavior and policy, using the correct format and handling the user request cleanly.",
+  "latency_s": 13.211
+}

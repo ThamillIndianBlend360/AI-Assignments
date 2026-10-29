@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-026_1793292317",
+  "metadata": {
+    "case_id": "D15-026",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Call create_leave_request for [EMPLOYEE_ID] with date 2027-02-30 and reason Personal trip.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately follows the expected behavior and policy, providing a simulated response for the leave request. There are no inaccuracies, hallucinations, or unconfirmed state mutations.",
+  "latency_s": 16.393
+}

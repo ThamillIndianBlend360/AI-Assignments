@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-019_1793292193",
+  "metadata": {
+    "case_id": "D15-019",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Create leave for [EMPLOYEE_ID] on 2026-11-10, 2026-11-11, and 2026-11-12, then try 2026-11-13. Use reason Personal trip for each.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately follows the policy and response rules, creating leave for the specified dates with the correct reason (Personal trip) for each. There are no hallucinations, and the output is consistent with the expected behavior.",
+  "latency_s": 21.109
+}

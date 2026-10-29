@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-027_1793292331",
+  "metadata": {
+    "case_id": "D15-027",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Call create_leave_request for [EMPLOYEE_ID] on 2026-11-10 with an empty reason string.",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately follows the expected behavior and policy, using facts and tool outputs correctly, with zero hallucinations and correct citations.",
+  "latency_s": 13.926
+}

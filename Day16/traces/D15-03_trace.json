@@ -1,0 +1,33 @@
+{
+  "trace_id": "trc_1793291670227",
+  "metadata": {
+    "case_id": "D15-03",
+    "model": "llama3",
+    "prompt_version": "v4",
+    "fault_flag": null
+  },
+  "steps": [
+    {
+      "name": "retrieve_policies",
+      "type": "retriever",
+      "latency_s": 0.0,
+      "output": [
+        "leave_policy#annual_entitlement"
+      ]
+    },
+    {
+      "name": "llm_call_1",
+      "type": "llm",
+      "latency_s": 0.0,
+      "input": "My email is [EMAIL_MASKED] and my ID is [EMPLOYEE_ID]. Am I allowed to share my password?",
+      "tool_call": "get_ticket_status(ticket_id='')"
+    },
+    {
+      "name": "enterprise_tool",
+      "type": "tool",
+      "latency_s": 0.0,
+      "error": null
+    }
+  ],
+  "total_latency_s": 0.0
+}

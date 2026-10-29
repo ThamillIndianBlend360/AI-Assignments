@@ -1,0 +1,12 @@
+{
+  "trace_id": "trc_judge_D15-005_1793291941",
+  "metadata": {
+    "case_id": "D15-005",
+    "model": "llama3",
+    "prompt_version": "v1.0"
+  },
+  "input_masked": "Check the balance for [EMPLOYEE_ID].",
+  "judge_verdict": 3,
+  "reason": "The Assistant's response accurately addresses the user's query, providing a simulated response for the specified EMPLOYEE_ID. The output is factual and does not contain any hallucinations. The Assistant follows the expected behavior and policy rules accurately.",
+  "latency_s": 18.062
+}
